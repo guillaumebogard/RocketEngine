@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
-project(greenblade VERSION 0.1 LANGUAGES CXX)
+project(rocketengine VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -8,19 +8,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # creates the compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
-set(GREENBLADE_BINARY_NAME greenblade)
+set(ROCKETENGINE_BINARY_NAME rocketengine)
 
-set(GREENBLADE_SRC_PATH    src       )
+set(ROCKETENGINE_SRC_PATH    src         )
 
-set(GREENBLADE_SRC
-    ${GREENBLADE_SRC_PATH}/main.cpp
+set(ROCKETENGINE_SRC
+    ${ROCKETENGINE_SRC_PATH}/main.cpp
 )
 
-set(GREENBLADE_INCLUDE_PATHS
-    ${GREENBLADE_SRC_PATH}/
+set(ROCKETENGINE_INCLUDE_PATHS
+    ${ROCKETENGINE_SRC_PATH}/
 )
 
-add_executable(${GREENBLADE_BINARY_NAME} ${GREENBLADE_SRC})
+add_executable(${ROCKETENGINE_BINARY_NAME} ${ROCKETENGINE_SRC})
 
-target_include_directories(${GREENBLADE_BINARY_NAME} PUBLIC  ${RTYPE_SERVER_INCLUDE})
-target_compile_options    (${GREENBLADE_BINARY_NAME} PRIVATE -W -Wall -Wextra -Wshadow -pedantic)
+target_include_directories(${ROCKETENGINE_BINARY_NAME} PUBLIC  ${ROCKETENGINE_INCLUDE_PATHS})
+target_compile_options    (${ROCKETENGINE_BINARY_NAME} PRIVATE -W -Wall -Wextra -Wshadow -pedantic)
