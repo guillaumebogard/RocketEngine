@@ -1,0 +1,19 @@
+name: build
+
+on:
+  push:
+    branches: [main, dev]
+  pull:
+    branches: [main, dev]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Builds binary
+        run: |
+          mkdir -p build && cd build
+          cmake ..
