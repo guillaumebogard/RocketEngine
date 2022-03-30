@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
-project(rocketengine VERSION 0.1 LANGUAGES CXX)
+project(RocketEngine VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -8,19 +8,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # creates the compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
-set(ROCKETENGINE_BINARY_NAME rocketengine)
+set(ROCKETENGINE_LIB          RocketEngine            )
 
-set(ROCKETENGINE_SRC_PATH    src         )
+set(ROCKETENGINE_SRC_PATH     src                     )
+
+set(ROCKETENGINE_INCLUDE_PATH ${ROCKETENGINE_SRC_PATH})
 
 set(ROCKETENGINE_SRC
-    ${ROCKETENGINE_SRC_PATH}/main.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
 )
 
-set(ROCKETENGINE_INCLUDE_PATHS
-    ${ROCKETENGINE_SRC_PATH}/
-)
+add_library(${ROCKETENGINE_LIB} SHARED ${ROCKETENGINE_SRC})
 
-add_executable(${ROCKETENGINE_BINARY_NAME} ${ROCKETENGINE_SRC})
-
-target_include_directories(${ROCKETENGINE_BINARY_NAME} PUBLIC  ${ROCKETENGINE_INCLUDE_PATHS})
-target_compile_options    (${ROCKETENGINE_BINARY_NAME} PRIVATE -W -Wall -Wextra -Wshadow -pedantic)
+target_include_directories(${ROCKETENGINE_LIB} PUBLIC ${ROCKETENGINE_INCLUDE_PATH})
+target_compile_options    (${ROCKETENGINE_LIB} PRIVATE -W -Wall -Wextra -Wshadow -pedantic)
