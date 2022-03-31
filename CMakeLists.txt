@@ -15,6 +15,7 @@ set(ROCKETENGINE_SRC_PATH     src                     )
 set(ROCKETENGINE_INCLUDE_PATH ${ROCKETENGINE_SRC_PATH})
 
 set(ROCKETENGINE_SRC
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
 )
 

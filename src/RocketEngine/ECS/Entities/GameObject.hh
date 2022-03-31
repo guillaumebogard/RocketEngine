@@ -11,7 +11,7 @@ namespace rocketengine::ecs
         std::string name;
 
     public:
-        GameObject(std::string_view name) noexcept;
+        GameObject(std::string_view _name) noexcept;
         GameObject(GameObject const& rhs) noexcept = default;
         GameObject(GameObject&& rhs) noexcept = default;
 
