@@ -1,5 +1,4 @@
-name: build
-
+name: Build
 on:
   push:
     branches: [main, dev]
@@ -8,22 +7,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build-on-Ubuntu:
+  Ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
       - name: Build project on Ubuntu
         run: |
           mkdir -p build && cd build
           cmake ..
           make
 
-  Build-on-MacOS:
+  MacOS:
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
       - name: Build project on MacOS
         run: |
           mkdir -p build && cd build
