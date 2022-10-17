@@ -8,22 +8,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Build-on-Ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build librocketengine.so on ubuntu
+      - name: Build project on Ubuntu
         run: |
           mkdir -p build && cd build
           cmake ..
           make
-    
+
+  Build-on-MacOS:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build librocketengine.dylib on macos
+      - name: Build project on MacOS
         run: |
           mkdir -p build && cd build
           cmake ..
