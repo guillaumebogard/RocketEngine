@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <string>
+#include <string_view>
 #include <vector>
 
 #include "RocketEngine/ECS/Components/AComponent.hh"
@@ -14,11 +14,11 @@ namespace rocketengine::ecs
     class GameObject
     {
     private:
-        std::string name;
+        std::string_view name;
         std::vector<std::unique_ptr<AComponent>> components;
 
     public:
-        explicit GameObject(std::string_view name) noexcept;
+        explicit GameObject(std::string_view _name) noexcept;
         GameObject(GameObject const& rhs) noexcept = default;
         GameObject(GameObject&& rhs) noexcept = default;
 

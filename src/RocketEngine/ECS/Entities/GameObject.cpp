@@ -3,7 +3,7 @@
 
 namespace rocketengine::ecs
 {
-GameObject::GameObject(std::string_view name) noexcept : name{name}
+GameObject::GameObject(std::string_view _name) noexcept : name{_name}
 {
     this->addComponent<Transform>();
 }
