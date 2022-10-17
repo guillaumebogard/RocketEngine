@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <string>
-#include <string_view>
 #include <vector>
 
 #include "RocketEngine/ECS/Components/AComponent.hh"
