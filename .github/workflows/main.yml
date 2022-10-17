@@ -13,7 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Builds binary
+      - name: Build librocketengine.so on ubuntu
+        run: |
+          mkdir -p build && cd build
+          cmake ..
+          make
+    
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build librocketengine.dylib on macos
         run: |
           mkdir -p build && cd build
           cmake ..
