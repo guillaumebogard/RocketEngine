@@ -1,4 +1,4 @@
-#include "Transform.hh"
+#include "RocketEngine/ECS/Components/Transform.hh"
 
 namespace rocketengine::ecs
 {

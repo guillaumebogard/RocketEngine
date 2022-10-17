@@ -11,7 +11,7 @@ namespace rocketengine::ecs
         AScript(AScript const& rhs) noexcept = default;
         AScript(AScript&& rhs) noexcept = default;
 
-        ~AScript() noexcept = default;
+        virtual ~AScript() noexcept = default;
 
         AScript& operator=(AScript const& rhs) noexcept = default;
         AScript& operator=(AScript&& rhs) noexcept = default;
