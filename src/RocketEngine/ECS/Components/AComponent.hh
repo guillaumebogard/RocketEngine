@@ -11,7 +11,7 @@ namespace rocketengine::ecs
         AComponent(AComponent const& rhs) noexcept = default;
         AComponent(AComponent&& rhs) noexcept = default;
 
-        ~AComponent() noexcept = default;
+        virtual ~AComponent() noexcept = default;
 
         AComponent& operator=(AComponent const& rhs) noexcept = default;
         AComponent& operator=(AComponent&& rhs) noexcept = default;

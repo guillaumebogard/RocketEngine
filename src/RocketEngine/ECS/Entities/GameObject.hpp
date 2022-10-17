@@ -19,7 +19,7 @@ namespace rocketengine::ecs
         std::vector<std::unique_ptr<AComponent>> components;
 
     public:
-        GameObject(std::string_view _name) noexcept;
+        explicit GameObject(std::string_view name) noexcept;
         GameObject(GameObject const& rhs) noexcept = default;
         GameObject(GameObject&& rhs) noexcept = default;
 
@@ -29,13 +29,13 @@ namespace rocketengine::ecs
         GameObject& operator=(GameObject&& rhs) noexcept = default;
 
         template<typename ComponentType, typename... Args>
-        void addComponent(Args&& args)
+        void addComponent(Args&&... args) noexcept
         {
-            this->components.emplace_back(std::make_unique<ComponentType>(*this, std::forward<Args>(args)...));
+            this->components.emplace_back(std::make_unique<ComponentType>(std::forward<Args>(args)...));
         }
 
         template<typename ComponentType>
-        void removeComponent()
+        void removeComponent() noexcept
         {
             std::remove_if(
                 this->components.begin(),

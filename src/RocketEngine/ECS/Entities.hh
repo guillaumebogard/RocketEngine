@@ -1,3 +1,3 @@
 #pragma once
 
-#include "Entities/GameObject.hh"
+#include "RocketEngine/ECS/Entities/GameObject.hpp"
