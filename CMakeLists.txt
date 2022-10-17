@@ -39,5 +39,4 @@ target_compile_options    (
     ${ROCKETENGINE_LIB}
     PRIVATE
     -W -Wall -Wextra -Wshadow -pedantic
-    -fconcepts
 )
