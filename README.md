@@ -1,6 +1,6 @@
-<h1>☄️ RocketEngine 🚀</h1>
+<h1>RocketEngine 🚀</h1>
 
-<h2>Description 🔥</h2>
+<h2>Description</h2>
 
 <p>
     RocketEngine is a simple Game Engine project that I started to develop during video game projects at my school (EPITECH).<br>
