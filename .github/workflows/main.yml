@@ -1,5 +1,4 @@
-name: build
-
+name: Build & Tests
 on:
   push:
     branches: [main, dev]
@@ -8,12 +7,64 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Ubuntu:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build-type: Release
+            cmake-options: -DBUILD_TESTS=OFF
+          - build-type: Tests
+            cmake-options: -DBUILD_TESTS=ON
 
-      - name: Builds binary
+    steps:
+      - name: Install packages
+        run: |
+          sudo apt-get install -y clang cmake ninja-build
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build project in release state
         run: |
           mkdir -p build && cd build
-          cmake ..
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
+          time ninja
+
+      - name: Run tests
+        if: ${{ matrix.build-type == 'Tests' }}
+        run: |
+          ./build/tests/tests
+
+  macOS:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build-type: Release
+            cmake-options: -DBUILD_TESTS=OFF
+          - build-type: Tests
+            cmake-options: -DBUILD_TESTS=ON
+
+    steps:
+      - name: Install packages
+        run: |
+          brew install ninja
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build project in release state
+        run: |
+          mkdir -p build && cd build
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_TESTS=ON
+          time ninja
+
+      - name: Run tests
+        if: ${{ matrix.build-type == 'Tests' }}
+        run: |
+          ./build/tests/tests

@@ -1,25 +1,65 @@
 cmake_minimum_required(VERSION 3.11)
 
-project(RocketEngine VERSION 0.1 LANGUAGES CXX)
+###################
+# Header settings #
+###################
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+project(RocketEngine VERSION 0.1 LANGUAGES C CXX)
 
-# creates the compile_commands.json file
+set(CMAKE_C_STANDARD                17  )
+set(CMAKE_CXX_STANDARD              20  )
+set(CMAKE_CXX_STANDARD_REQUIRED     True)
+set(CMAKE_POSITION_INDEPENDENT_CODE True)
+
+# Creates 'compile_commands.json' file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
-set(ROCKETENGINE_LIB          RocketEngine            )
+#########
+
+# Option to launch tests
+option(BUILD_TESTS "Builds tests" ON)
+
+# Adds 'deps/CMakeLists.txt' to the build
+add_subdirectory(deps)
+
+#######################
+# RocketEngine target #
+#######################
+
+set(ROCKETENGINE_LIB          rocketengine            )
 
 set(ROCKETENGINE_SRC_PATH     src                     )
-
 set(ROCKETENGINE_INCLUDE_PATH ${ROCKETENGINE_SRC_PATH})
 
-set(ROCKETENGINE_SRC
+set(ROCKETENGINE_FILES
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
 )
 
-add_library(${ROCKETENGINE_LIB} SHARED ${ROCKETENGINE_SRC})
+# Creates ${ROCKETENGINE_LIB} target as a SHARED library from ${ROCKETENGINE_FILES} files
+add_library               (
+    ${ROCKETENGINE_LIB}
+    SHARED
+    ${ROCKETENGINE_FILES}
+)
 
-target_include_directories(${ROCKETENGINE_LIB} PUBLIC ${ROCKETENGINE_INCLUDE_PATH})
-target_compile_options    (${ROCKETENGINE_LIB} PRIVATE -W -Wall -Wextra -Wshadow -pedantic)
+# Adds include directories to the ${ROCKETENGINE_LIB} target
+target_include_directories(
+    ${ROCKETENGINE_LIB}
+    PUBLIC
+    ${ROCKETENGINE_INCLUDE_PATH}
+)
+
+# Adds compilation options to the ${ROCKETENGINE_LIB} target
+target_compile_options    (
+    ${ROCKETENGINE_LIB}
+    PRIVATE
+    -W -Wall -Wextra -Wshadow -pedantic
+)
+
+#########
+
+if(BUILD_TESTS)
+    # Adds 'tests/CMakeLists.txt' to the build
+    add_subdirectory(tests)
+endif()
