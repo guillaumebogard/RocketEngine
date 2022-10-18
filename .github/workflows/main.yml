@@ -39,7 +39,7 @@ jobs:
           ls
 
       - name: Run tests
-        if: ${{ matrix.build-type == 'Tests' }}
+        if: ${{ matrix.build-type == 'Debug' }}
         run: |
           ./bin/tests/tests
 
@@ -75,6 +75,6 @@ jobs:
           ls
 
       - name: Run tests
-        if: ${{ matrix.build-type == 'Tests' }}
+        if: ${{ matrix.build-type == 'Debug' }}
         run: |
           ./bin/tests/tests
