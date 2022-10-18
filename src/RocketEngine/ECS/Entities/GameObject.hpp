@@ -8,17 +8,16 @@
 
 #include "RocketEngine/ECS/Components/AComponent.hh"
 #include "RocketEngine/ECS/Object.hh"
+#include "RocketEngine/ECS/Scripts/AScript.hh"
 
 namespace rocketengine::ecs
 {
-    template <typename T>
-    concept ComponentType = std::is_base_of_v<AComponent, T>;
-
     class GameObject : public Object
     {
     private:
         std::string name;
         std::vector<std::unique_ptr<AComponent>> components;
+        std::vector<std::unique_ptr<AScript>> scripts;
 
     public:
         explicit GameObject(std::string_view _name) noexcept;
@@ -63,6 +62,34 @@ namespace rocketengine::ecs
                           [](std::unique_ptr<AComponent> const& component_ptr) -> bool
                           {
                               return dynamic_cast<ComponentType*>(component_ptr.get()) != nullptr;
+                          });
+        }
+
+        template <typename ScriptType>
+        [[nodiscard]] bool hasScript() const noexcept
+        {
+            return std::any_of(this->scripts.begin(), this->scripts.end(),
+                               [](std::unique_ptr<AScript> const& script_ptr) -> bool
+                               {
+                                   return dynamic_cast<ScriptType*>(script_ptr.get()) != nullptr;
+                               });
+        }
+
+        template <typename ScriptType, typename... Args>
+        ScriptType& addScript(Args&&... args) noexcept
+        {
+            auto& script_ptr = this->scripts.emplace_back(std::make_unique<ScriptType>(std::forward<Args>(args)...));
+
+            return reinterpret_cast<ScriptType&>(*(script_ptr.get()));
+        }
+
+        template <typename ScriptType>
+        void removeScript() noexcept
+        {
+            std::erase_if(this->scripts,
+                          [](std::unique_ptr<AScript> const& script_ptr) -> bool
+                          {
+                              return dynamic_cast<ScriptType*>(script_ptr.get()) != nullptr;
                           });
         }
     };
