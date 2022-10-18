@@ -82,7 +82,7 @@ namespace rocketengine::ecs
         virtual void onTriggerEnter(GameObject& other) noexcept;
 
         /**
-         * @brief onCollisionStay() is called once per frame for every colliders that make contact with this object's trigger.
+         * @brief onTriggerStay() is called once per frame for every colliders that make contact with this object's trigger.
          *
          * @param other A reference to the GameObject with which a trigger occurred.
          */
