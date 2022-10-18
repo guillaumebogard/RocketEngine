@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 namespace rocketengine::ecs
 {
     class AScript
@@ -23,4 +25,7 @@ namespace rocketengine::ecs
         [[nodiscard]] bool isEnabled() const noexcept;
         void setEnabled(bool value) noexcept;
     };
+
+    template <typename T>
+    concept ScriptType = std::is_base_of_v<AScript, T>;
 } // namespace rocketengine::ecs

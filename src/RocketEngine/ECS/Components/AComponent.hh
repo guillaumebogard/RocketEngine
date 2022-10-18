@@ -18,4 +18,7 @@ namespace rocketengine::ecs
         AComponent& operator=(AComponent const& rhs) noexcept = default;
         AComponent& operator=(AComponent&& rhs) noexcept = default;
     };
+
+    template <typename T>
+    concept ComponentType = std::is_base_of_v<AComponent, T>;
 } // namespace rocketengine::ecs
