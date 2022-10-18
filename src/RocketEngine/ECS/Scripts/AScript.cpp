@@ -11,4 +11,45 @@ namespace rocketengine::ecs
     {
         this->enabled = value;
     }
+
+    void awake() noexcept
+    {
+    }
+
+    void start() noexcept
+    {
+    }
+
+    void update() noexcept
+    {
+    }
+
+    void lateUpdate() noexcept
+    {
+    }
+
+    void onTriggerEnter(GameObject&) noexcept
+    {
+    }
+
+    void onTriggerStay(GameObject&) noexcept
+    {
+    }
+
+    void onTriggerExit(GameObject&) noexcept
+    {
+    }
+
+    void onCollisionEnter(GameObject&) noexcept
+    {
+    }
+
+    void onCollisionStay(GameObject&) noexcept
+    {
+    }
+
+    void onCollisionExit(GameObject&) noexcept
+    {
+    }
+
 } // namespace rocketengine::ecs
