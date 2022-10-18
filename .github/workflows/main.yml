@@ -61,7 +61,7 @@ jobs:
       - name: Build project in release state
         run: |
           mkdir -p build && cd build
-          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_TESTS=ON
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
           time ninja
 
       - name: Run tests
