@@ -1,8 +1,10 @@
 #pragma once
 
+#include "RocketEngine/ECS/Object.hh"
+
 namespace rocketengine::ecs
 {
-    class AComponent
+    class AComponent : public Object
     {
     protected:
         AComponent() noexcept = default;
@@ -11,7 +13,7 @@ namespace rocketengine::ecs
         AComponent(AComponent const& rhs) noexcept = default;
         AComponent(AComponent&& rhs) noexcept = default;
 
-        virtual ~AComponent() noexcept = default;
+        ~AComponent() noexcept override = default;
 
         AComponent& operator=(AComponent const& rhs) noexcept = default;
         AComponent& operator=(AComponent&& rhs) noexcept = default;

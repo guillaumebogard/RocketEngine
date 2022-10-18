@@ -17,10 +17,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 #########
 
 # Option to launch tests
-option(BUILD_TESTS "Builds tests" ON)
-
-# Adds 'deps/CMakeLists.txt' to the build
-add_subdirectory(deps)
+option(BUILD_TESTS "Builds tests" OFF)
 
 #######################
 # RocketEngine target #
@@ -32,8 +29,10 @@ set(ROCKETENGINE_SRC_PATH     src                     )
 set(ROCKETENGINE_INCLUDE_PATH ${ROCKETENGINE_SRC_PATH})
 
 set(ROCKETENGINE_FILES
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/SpriteRenderer.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Object.cpp
 )
 
 # Creates ${ROCKETENGINE_LIB} target as a SHARED library from ${ROCKETENGINE_FILES} files
@@ -56,6 +55,17 @@ target_compile_options    (
     PRIVATE
     -W -Wall -Wextra -Wshadow -pedantic
 )
+
+# 'expected'
+# ! -> To do: make it work within deps/CMakeLists.txt
+target_include_directories(
+    ${ROCKETENGINE_LIB}
+    PUBLIC
+    deps/expected/include
+)
+
+# Adds 'deps/CMakeLists.txt' to the build
+add_subdirectory(deps)
 
 #########
 
