@@ -32,6 +32,7 @@ set(ROCKETENGINE_FILES
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/SpriteRenderer.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Scripts/AScript.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Object.cpp
 )
 
