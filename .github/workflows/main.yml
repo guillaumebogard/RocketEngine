@@ -33,15 +33,13 @@ jobs:
           CMAKE_OPTIONS: ${{ matrix.cmake-options }}
         run: |
           mkdir -p build && cd build
-          pwd
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
           time ninja
-          ls
 
       - name: Run tests
         if: ${{ matrix.build-type == 'Debug' }}
         run: |
-          ./bin/tests/tests
+          ./build/bin/tests/tests
 
   macOS:
     runs-on: macos-12
@@ -69,12 +67,10 @@ jobs:
           CMAKE_OPTIONS: ${{ matrix.cmake-options }}
         run: |
           mkdir -p build && cd build
-          pwd
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
           time ninja
-          ls
 
       - name: Run tests
         if: ${{ matrix.build-type == 'Debug' }}
         run: |
-          ./bin/tests/tests
+          ./build/bin/tests/tests
