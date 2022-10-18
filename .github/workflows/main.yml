@@ -15,7 +15,7 @@ jobs:
         include:
           - build-type: Release
             cmake-options: -DBUILD_TESTS=OFF
-          - build-type: Tests
+          - build-type: Debug
             cmake-options: -DBUILD_TESTS=ON
 
     steps:
@@ -28,15 +28,20 @@ jobs:
           submodules: recursive
 
       - name: Build project in release state
+        env:
+          BUILD_TYPE: ${{ matrix.build-type }}
+          CMAKE_OPTIONS: ${{ matrix.cmake-options }}
         run: |
           mkdir -p build && cd build
-          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
+          pwd
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
           time ninja
+          ls
 
       - name: Run tests
         if: ${{ matrix.build-type == 'Tests' }}
         run: |
-          ./tests/tests
+          ./bin/tests/tests
 
   macOS:
     runs-on: macos-12
@@ -46,7 +51,7 @@ jobs:
         include:
           - build-type: Release
             cmake-options: -DBUILD_TESTS=OFF
-          - build-type: Tests
+          - build-type: Debug
             cmake-options: -DBUILD_TESTS=ON
 
     steps:
@@ -59,12 +64,17 @@ jobs:
           submodules: recursive
 
       - name: Build project in release state
+        env:
+          BUILD_TYPE: ${{ matrix.build-type }}
+          CMAKE_OPTIONS: ${{ matrix.cmake-options }}
         run: |
           mkdir -p build && cd build
-          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
+          pwd
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ $CMAKE_OPTIONS
           time ninja
+          ls
 
       - name: Run tests
         if: ${{ matrix.build-type == 'Tests' }}
         run: |
-          ./tests/tests
+          ./bin/tests/tests
