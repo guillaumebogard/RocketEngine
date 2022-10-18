@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #include "RocketEngine/ECS/Object.hh"
 
 namespace rocketengine::ecs
