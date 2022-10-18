@@ -21,5 +21,8 @@ namespace rocketengine::ecs
 
         Transform& operator=(Transform const& rhs) noexcept = default;
         Transform& operator=(Transform&& rhs) noexcept = default;
+
+    public:
+        explicit operator std::string() const noexcept override;
     };
 } // namespace rocketengine::ecs

@@ -15,5 +15,8 @@ namespace rocketengine::ecs
 
         SpriteRenderer& operator=(SpriteRenderer const& rhs) noexcept = default;
         SpriteRenderer& operator=(SpriteRenderer&& rhs) noexcept = default;
+
+    public:
+        explicit operator std::string() const noexcept override;
     };
 } // namespace rocketengine::ecs
