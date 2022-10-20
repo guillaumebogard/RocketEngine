@@ -18,11 +18,18 @@ TEST(GameObject, addComponent_SpriteRenderer)
 {
     rocketengine::ecs::GameObject dummy{"Dummy"};
 
-    EXPECT_FALSE(dummy.hasComponent<rocketengine::ecs::SpriteRenderer>());
+    EXPECT_TRUE(dummy.hasComponent<rocketengine::ecs::Transform>());
+}
 
-    dummy.addComponent<rocketengine::ecs::SpriteRenderer>();
+// NOLINTNEXTLINE
+TEST(GameObject, addComponent_ComponentAlreadyPresent)
+{
+    rocketengine::ecs::GameObject dummy{"Dummy"};
 
-    EXPECT_TRUE(dummy.hasComponent<rocketengine::ecs::SpriteRenderer>());
+    EXPECT_TRUE(dummy.hasComponent<rocketengine::ecs::Transform>());
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto)
+    EXPECT_THROW(dummy.addComponent<rocketengine::ecs::Transform>(), rocketengine::exception::ecs::ComponentAlreadyPresent);
 }
 
 // NOLINTNEXTLINE
@@ -30,7 +37,7 @@ TEST(GameObject, removeComponent_JustAdded)
 {
     rocketengine::ecs::GameObject dummy{"Dummy"};
 
-    EXPECT_TRUE (dummy.hasComponent<rocketengine::ecs::Transform>());
+    EXPECT_TRUE(dummy.hasComponent<rocketengine::ecs::Transform>());
     EXPECT_FALSE(dummy.hasComponent<rocketengine::ecs::SpriteRenderer>());
 
     dummy.addComponent<rocketengine::ecs::SpriteRenderer>();
@@ -40,6 +47,6 @@ TEST(GameObject, removeComponent_JustAdded)
 
     dummy.removeComponent<rocketengine::ecs::SpriteRenderer>();
 
-    EXPECT_TRUE (dummy.hasComponent<rocketengine::ecs::Transform>());
+    EXPECT_TRUE(dummy.hasComponent<rocketengine::ecs::Transform>());
     EXPECT_FALSE(dummy.hasComponent<rocketengine::ecs::SpriteRenderer>());
 }

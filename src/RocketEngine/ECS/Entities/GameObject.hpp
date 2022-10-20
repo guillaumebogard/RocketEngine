@@ -6,6 +6,9 @@
 #include <string_view>
 #include <vector>
 
+#include "RocketEngine/Exceptions/ECS/Entities/ComponentAlreadyPresent.hh"
+#include "RocketEngine/Exceptions/ECS/Entities/ScriptAlreadyPresent.hh"
+
 #include "RocketEngine/ECS/Components/AComponent.hh"
 #include "RocketEngine/ECS/Object.hh"
 #include "RocketEngine/ECS/Scripts/AScript.hh"
@@ -48,8 +51,11 @@ namespace rocketengine::ecs
         }
 
         template <typename ComponentType, typename... Args>
-        ComponentType& addComponent(Args&&... args) noexcept
+        ComponentType& addComponent(Args&&... args)
         {
+            if (this->hasComponent<ComponentType>())
+                throw rocketengine::exception::ecs::ComponentAlreadyPresent{};
+
             auto& component_ptr = this->components.emplace_back(std::make_unique<ComponentType>(std::forward<Args>(args)...));
 
             return reinterpret_cast<ComponentType&>(*(component_ptr.get()));
@@ -76,8 +82,11 @@ namespace rocketengine::ecs
         }
 
         template <typename ScriptType, typename... Args>
-        ScriptType& addScript(Args&&... args) noexcept
+        ScriptType& addScript(Args&&... args)
         {
+            if (this->hasComponent<ScriptType>())
+                throw rocketengine::exception::ecs::ComponentAlreadyPresent{};
+
             auto& script_ptr = this->scripts.emplace_back(std::make_unique<ScriptType>(std::forward<Args>(args)...));
 
             return reinterpret_cast<ScriptType&>(*(script_ptr.get()));
