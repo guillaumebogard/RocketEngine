@@ -1,3 +1,3 @@
 #pragma once
 
-#include "Scripts/AScript.hh"
+#include "RocketEngine/ECS/Scripts/AScript.hh"
