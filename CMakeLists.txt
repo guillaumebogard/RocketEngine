@@ -33,6 +33,8 @@ set(ROCKETENGINE_FILES
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Scripts/AScript.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Systems/Scene.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Systems/SceneManager.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Object.cpp
 )
 
@@ -55,14 +57,6 @@ target_compile_options    (
     ${ROCKETENGINE_LIB}
     PRIVATE
     -W -Wall -Wextra -Wshadow -pedantic
-)
-
-# 'expected'
-# ! -> To do: make it work within deps/CMakeLists.txt
-target_include_directories(
-    ${ROCKETENGINE_LIB}
-    PUBLIC
-    deps/expected/include
 )
 
 # Adds 'deps/CMakeLists.txt' to the build

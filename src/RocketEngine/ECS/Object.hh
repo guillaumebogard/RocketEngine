@@ -21,6 +21,7 @@ namespace rocketengine::ecs
 
     public:
         virtual explicit operator std::string() const noexcept = 0;
-        friend std::ostream& operator<<(std::ostream &output_stream, Object const& object) noexcept;
+
+    friend std::ostream& operator<<(std::ostream &output_stream, Object const& object) noexcept;
     };
 } // namespace rocketengine::ecs
