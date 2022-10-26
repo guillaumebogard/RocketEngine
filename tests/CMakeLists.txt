@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.11)
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests/)
-
 set(ROCKETENGINE_TESTS_BIN          tests)
 set(ROCKETENGINE_TESTS_PATH         ./   )
 set(ROCKETENGINE_TESTS_INCLUDE_PATH ./   )
 
 set(ROCKETENGINE_TESTS_FILES
+    ${ROCKETENGINE_TESTS_PATH}/RocketEngine/App/Arguments.cpp
     ${ROCKETENGINE_TESTS_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
 )
 

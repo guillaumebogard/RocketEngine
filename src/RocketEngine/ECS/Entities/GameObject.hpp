@@ -40,65 +40,65 @@ namespace rocketengine::ecs
         void setName(std::string_view new_name) noexcept;
 
     public:
-        template <typename ComponentType>
+        template <ComponentType T>
         [[nodiscard]] bool hasComponent() const noexcept
         {
             return std::any_of(this->components.begin(), this->components.end(),
                                [](std::unique_ptr<AComponent> const& component_ptr) -> bool
                                {
-                                   return dynamic_cast<ComponentType*>(component_ptr.get()) != nullptr;
+                                   return dynamic_cast<T*>(component_ptr.get()) != nullptr;
                                });
         }
 
-        template <typename ComponentType, typename... Args>
-        ComponentType& addComponent(Args&&... args)
+        template <ComponentType T, typename... Args>
+        T& addComponent(Args&&... args)
         {
-            if (this->hasComponent<ComponentType>())
+            if (this->hasComponent<T>())
                 throw rocketengine::exception::ecs::ComponentAlreadyPresent{};
 
-            auto& component_ptr = this->components.emplace_back(std::make_unique<ComponentType>(std::forward<Args>(args)...));
+            auto& component_ptr = this->components.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
 
-            return reinterpret_cast<ComponentType&>(*(component_ptr.get()));
+            return reinterpret_cast<T&>(*(component_ptr.get()));
         }
 
-        template <typename ComponentType>
+        template <ComponentType T>
         void removeComponent() noexcept
         {
             std::erase_if(this->components,
                           [](std::unique_ptr<AComponent> const& component_ptr) -> bool
                           {
-                              return dynamic_cast<ComponentType*>(component_ptr.get()) != nullptr;
+                              return dynamic_cast<T*>(component_ptr.get()) != nullptr;
                           });
         }
 
-        template <typename ScriptType>
+        template <ScriptType T>
         [[nodiscard]] bool hasScript() const noexcept
         {
             return std::any_of(this->scripts.begin(), this->scripts.end(),
                                [](std::unique_ptr<AScript> const& script_ptr) -> bool
                                {
-                                   return dynamic_cast<ScriptType*>(script_ptr.get()) != nullptr;
+                                   return dynamic_cast<T*>(script_ptr.get()) != nullptr;
                                });
         }
 
-        template <typename ScriptType, typename... Args>
-        ScriptType& addScript(Args&&... args)
+        template <ScriptType T, typename... Args>
+        T& addScript(Args&&... args)
         {
-            if (this->hasComponent<ScriptType>())
+            if (this->hasComponent<T>())
                 throw rocketengine::exception::ecs::ComponentAlreadyPresent{};
 
-            auto& script_ptr = this->scripts.emplace_back(std::make_unique<ScriptType>(std::forward<Args>(args)...));
+            auto& script_ptr = this->scripts.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
 
-            return reinterpret_cast<ScriptType&>(*(script_ptr.get()));
+            return reinterpret_cast<T&>(*(script_ptr.get()));
         }
 
-        template <typename ScriptType>
+        template <ScriptType T>
         void removeScript() noexcept
         {
             std::erase_if(this->scripts,
                           [](std::unique_ptr<AScript> const& script_ptr) -> bool
                           {
-                              return dynamic_cast<ScriptType*>(script_ptr.get()) != nullptr;
+                              return dynamic_cast<T*>(script_ptr.get()) != nullptr;
                           });
         }
     };
