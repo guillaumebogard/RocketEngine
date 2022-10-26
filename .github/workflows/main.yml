@@ -14,9 +14,9 @@ jobs:
       matrix:
         include:
           - build-type: Release
-            cmake-options: -DBUILD_TESTS=OFF
+            cmake-options: -DBUILD_EXAMPLES=ON -DBUILD_TESTS=OFF
           - build-type: Debug
-            cmake-options: -DBUILD_TESTS=ON
+            cmake-options: -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=ON
 
     steps:
       - name: Install packages
@@ -39,7 +39,7 @@ jobs:
       - name: Run tests
         if: ${{ matrix.build-type == 'Debug' }}
         run: |
-          ./build/bin/tests/tests
+          ./build/tests/tests
 
   macOS:
     runs-on: macos-12
@@ -48,9 +48,9 @@ jobs:
       matrix:
         include:
           - build-type: Release
-            cmake-options: -DBUILD_TESTS=OFF
+            cmake-options: -DBUILD_EXAMPLES=ON -DBUILD_TESTS=OFF
           - build-type: Debug
-            cmake-options: -DBUILD_TESTS=ON
+            cmake-options: -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=ON
 
     steps:
       - name: Install packages
@@ -73,4 +73,4 @@ jobs:
       - name: Run tests
         if: ${{ matrix.build-type == 'Debug' }}
         run: |
-          ./build/bin/tests/tests
+          ./build/tests/tests

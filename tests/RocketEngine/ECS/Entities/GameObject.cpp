@@ -1,5 +1,3 @@
-#include "RocketEngine/ECS/Components/SpriteRenderer.hh"
-#include "RocketEngine/ECS/Components/Transform.hh"
 #include <gtest/gtest.h>
 
 #include <RocketEngine/ECS/Components.hh>

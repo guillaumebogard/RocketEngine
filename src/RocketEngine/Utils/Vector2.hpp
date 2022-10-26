@@ -23,6 +23,7 @@ namespace rocketengine::utils
         Vector2& operator=(Vector2 const& rhs) noexcept = default;
         Vector2& operator=(Vector2&& rhs) noexcept = default;
 
+    public:
         Vector2& operator+=(Vector2 const& rhs) noexcept
         {
             this->x += rhs.x;

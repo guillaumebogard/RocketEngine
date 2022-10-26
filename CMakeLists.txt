@@ -14,10 +14,14 @@ set(CMAKE_POSITION_INDEPENDENT_CODE True)
 # Creates 'compile_commands.json' file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
-#########
+###########
+# Options #
+###########
 
+# Option to launch examples
+option(BUILD_EXAMPLES "Builds examples" OFF)
 # Option to launch tests
-option(BUILD_TESTS "Builds tests" OFF)
+option(BUILD_TESTS    "Builds tests"    OFF)
 
 #######################
 # RocketEngine target #
@@ -29,6 +33,8 @@ set(ROCKETENGINE_SRC_PATH     src                     )
 set(ROCKETENGINE_INCLUDE_PATH ${ROCKETENGINE_SRC_PATH})
 
 set(ROCKETENGINE_FILES
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/App/App.cpp
+    ${ROCKETENGINE_SRC_PATH}/RocketEngine/App/Arguments.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/SpriteRenderer.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Components/Transform.cpp
     ${ROCKETENGINE_SRC_PATH}/RocketEngine/ECS/Entities/GameObject.cpp
@@ -62,7 +68,14 @@ target_compile_options    (
 # Adds 'deps/CMakeLists.txt' to the build
 add_subdirectory(deps)
 
-#########
+###################
+# Optional Builds #
+###################
+
+if(BUILD_EXAMPLES)
+    # Adds 'examples/CMakeLists.txt' to the build
+    add_subdirectory(examples)
+endif()
 
 if(BUILD_TESTS)
     # Adds 'tests/CMakeLists.txt' to the build
