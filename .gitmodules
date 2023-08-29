@@ -1,7 +1,3 @@
 [submodule "deps/googletest"]
 	path = deps/googletest
 	url = https://github.com/google/googletest.git
-
-[submodule "deps/expected"]
-	path = deps/expected
-	url = git@github.com:TartanLlama/expected.git

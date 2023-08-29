@@ -1,0 +1,52 @@
+name: Build
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+  workflow_dispatch:
+
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Install packages
+        run: |
+          sudo apt-get install -y clang cmake ninja-build
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build project
+        env:
+          BUILD_TYPE: Release
+        run: |
+          mkdir -p build && cd build
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_EXAMPLES=ON -DBUILD_TESTS=OFF
+          time ninja
+
+  macOS:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Install packages
+        run: |
+          brew install ninja
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build project
+        env:
+          BUILD_TYPE: Release
+        run: |
+          mkdir -p build && cd build
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_EXAMPLES=ON -DBUILD_TESTS=OFF
+          time ninja

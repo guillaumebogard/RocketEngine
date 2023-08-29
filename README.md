@@ -1,9 +1,6 @@
-<h1>RocketEngine 🚀</h1>
+# 🚀 Rocket Engine
 
-<h2>Description</h2>
+![Build](https://github.com/guillaumebogard/RocketEngine/actions/workflows/build.yml/badge.svg)
+![Tests](https://github.com/guillaumebogard/RocketEngine/actions/workflows/tests.yml/badge.svg)
 
-<p>
-    RocketEngine is a simple Game Engine project that I started to develop during video game projects at my school (EPITECH).<br>
-    <br>
-    As I finally have personal time to develop, I wanted to start clean and go as further as I could with a fresh engine.<br>
-</p>
+The goal of RocketEngine is to create a simple version of a modern game engine that could be used to create scenes, simulation and automation.
