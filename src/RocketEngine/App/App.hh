@@ -2,8 +2,6 @@
 
 #include <chrono>
 #include <memory>
-#include <string>
-#include <string_view>
 #include <type_traits>
 
 #include "RocketEngine/App/AppConfig.hh"
@@ -17,7 +15,6 @@ namespace rocketengine::app
         using FrameTime = std::chrono::steady_clock::time_point;
 
     private:
-        std::string name;
         Arguments arguments;
         AppConfig app_config;
 
@@ -25,7 +22,8 @@ namespace rocketengine::app
         FrameTime previous_frame_timepoint;
 
     protected:
-        App(std::string_view name, Arguments&& arguments, AppConfig const& app_config) noexcept;
+        App(Arguments&& arguments, AppConfig&& app_config) noexcept;
+        App(Arguments const& arguments, AppConfig const& app_config) noexcept;
 
     public:
         App(App const& rhs) noexcept = default;
@@ -37,7 +35,6 @@ namespace rocketengine::app
         App& operator=(App&& rhs) noexcept = default;
 
     public:
-        [[nodiscard]] std::string const& getName() const noexcept;
         [[nodiscard]] Arguments const& getArguments() const noexcept;
         [[nodiscard]] AppConfig const& getAppConfig() const noexcept;
 
@@ -46,6 +43,10 @@ namespace rocketengine::app
 
     private:
         void waitUntilNextFrame() noexcept;
+
+    private:
+        friend std::unique_ptr<App> std::make_unique<App>(Arguments&&, AppConfig&&);
+        friend std::unique_ptr<App> std::make_unique<App>(Arguments const&, AppConfig const&);
     };
 
     template <typename T>

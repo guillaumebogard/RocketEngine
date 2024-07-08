@@ -1,22 +1,14 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 
 namespace rocketengine::app
 {
     struct AppConfig
     {
     public:
-        std::size_t fps{1};
-
-    public:
-        AppConfig() noexcept = default;
-        AppConfig(AppConfig const& rhs) noexcept = default;
-        AppConfig(AppConfig&& rhs) noexcept = default;
-
-        ~AppConfig() noexcept = default;
-
-        AppConfig& operator=(AppConfig const& rhs) noexcept = default;
-        AppConfig& operator=(AppConfig&& rhs) noexcept = default;
+        std::string name{"App"};
+        std::size_t fps{60};
     };
 } // namespace rocketengine::app

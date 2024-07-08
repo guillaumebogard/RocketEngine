@@ -6,17 +6,18 @@
 
 namespace rocketengine::app
 {
-    App::App(std::string_view _name, Arguments&& _arguments, AppConfig const& _app_config) noexcept:
-        name{_name},
+    App::App(Arguments&& _arguments, AppConfig&& _app_config) noexcept:
         arguments{std::move(_arguments)},
-        app_config{_app_config},
+        app_config{std::move(_app_config)},
         previous_frame_timepoint{std::chrono::steady_clock::now()}
     {
     }
 
-    std::string const& App::getName() const noexcept
+    App::App(Arguments const& _arguments, AppConfig const& _app_config) noexcept:
+        arguments{_arguments},
+        app_config{_app_config},
+        previous_frame_timepoint{std::chrono::steady_clock::now()}
     {
-        return this->name;
     }
 
     Arguments const& App::getArguments() const noexcept
@@ -31,7 +32,7 @@ namespace rocketengine::app
 
     void App::run() noexcept
     {
-        std::cout << "Application '" << this->name << "' starting to run" << "\n\n";
+        std::cout << "Application '" << this->app_config.name << "' starting to run" << "\n\n";
 
         std::size_t frame_count = 0;
 

@@ -5,6 +5,7 @@ set(ROCKETENGINE_TESTS_PATH         ./   )
 set(ROCKETENGINE_TESTS_INCLUDE_PATH ./   )
 
 set(ROCKETENGINE_TESTS_FILES
+    ${ROCKETENGINE_TESTS_PATH}/RocketEngine/App/App.cpp
     ${ROCKETENGINE_TESTS_PATH}/RocketEngine/App/Arguments.cpp
 )
 

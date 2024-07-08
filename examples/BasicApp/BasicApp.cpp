@@ -1,6 +1,11 @@
 #include "BasicApp.hh"
 
-BasicApp::BasicApp(std::string_view name, rocketengine::app::Arguments&& arguments, rocketengine::app::AppConfig const& app_config) noexcept:
-    App{name, std::move(arguments), app_config}
+BasicApp::BasicApp(rocketengine::app::Arguments&& arguments, rocketengine::app::AppConfig&& app_config) noexcept:
+    App{std::move(arguments), std::move(app_config)}
+{
+}
+
+BasicApp::BasicApp(rocketengine::app::Arguments const& arguments, rocketengine::app::AppConfig const& app_config) noexcept:
+    App{arguments, app_config}
 {
 }

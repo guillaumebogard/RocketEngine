@@ -5,7 +5,8 @@
 class BasicApp final : public rocketengine::app::App
 {
 public:
-    BasicApp(std::string_view name, rocketengine::app::Arguments&& arguments, rocketengine::app::AppConfig const& app_config) noexcept;
+    BasicApp(rocketengine::app::Arguments&& arguments, rocketengine::app::AppConfig&& app_config) noexcept;
+    BasicApp(rocketengine::app::Arguments const& arguments, rocketengine::app::AppConfig const& app_config) noexcept;
 
     BasicApp(BasicApp const& rhs) noexcept = default;
     BasicApp(BasicApp&& rhs) noexcept = default;
