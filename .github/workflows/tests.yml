@@ -22,6 +22,8 @@ jobs:
           submodules: recursive
 
       - name: Build project
+        env:
+          BUILD_TYPE: Release
         run: |
           mkdir -p build && cd build
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=ON
@@ -52,5 +54,7 @@ jobs:
           time ninja
 
       - name: Run tests
+        env:
+          BUILD_TYPE: Release
         run: |
           ./build/tests/tests
